@@ -4,6 +4,7 @@ import cors from "cors"
 import bodyParser from "body-parser"
 import helmet from "helmet"
 import morgan from "morgan"
+import projectRoutes from "./routes/projectRoutes"
 
 //Routes Import
 // configurations
@@ -21,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));  // this one is used to acc
 app.get('/', (req,res)=>{
     res.send('This is home route')
 })
+app.use('/projects',projectRoutes)
 
 // server
 const port = process.env.PORT || 3000;
