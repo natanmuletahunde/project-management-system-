@@ -5,6 +5,7 @@ import bodyParser from "body-parser"
 import helmet from "helmet"
 import morgan from "morgan"
 import projectRoutes from "./routes/projectRoutes"
+import taskRoutes from "./routes/taskRoutes"
 
 //Routes Import
 // configurations
@@ -23,7 +24,7 @@ app.get('/', (req,res)=>{
     res.send('This is home route')
 })
 app.use('/projects',projectRoutes)
-app.use
+app.use('/tasks',taskRoutes)
 // server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
