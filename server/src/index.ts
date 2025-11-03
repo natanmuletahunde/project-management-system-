@@ -23,7 +23,7 @@ app.get('/', (req,res)=>{
     res.send('This is home route')
 })
 app.use('/projects',projectRoutes)
-
+app.use
 // server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
