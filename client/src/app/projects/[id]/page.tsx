@@ -1,6 +1,6 @@
-import React from 'react'
+'use client'
 import { useState } from 'react'
-import ProjectHeader from "@/app/projects/[id]/ProjectHeader";
+import ProjectHeader from "@/app/projects/ProjectHeader";
 type Props = {
     params:{id:string}
 }
