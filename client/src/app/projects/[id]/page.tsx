@@ -12,7 +12,7 @@ const Project = ({params}: Props) => {
   return (
     <div>
         {/*  new task*/}
-        <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab}/>
+        {/* <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab}/> */}
     </div>
   )
 }
