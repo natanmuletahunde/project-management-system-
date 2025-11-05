@@ -3,6 +3,7 @@ import { useState } from 'react'
 import ProjectHeader from "@/app/projects/ProjectHeader";
 import Board from '@/app/projects/BoardView';
 import List from '@/app/projects/ListView';
+import Timeline from '@/app/projects/Timeline';
 type Props = {
     params:{id:string}
 }
