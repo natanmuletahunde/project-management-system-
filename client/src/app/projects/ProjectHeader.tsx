@@ -1,7 +1,7 @@
 import React from 'react'
 
 type Props = {
-    
+  activeTab: string;
 }
 
 const ProjectHeader = (props: Props) => {
