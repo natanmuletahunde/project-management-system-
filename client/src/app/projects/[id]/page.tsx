@@ -16,6 +16,9 @@ const Project = ({params}: Props) => {
         {activeTab === "Board" && (
             <Board id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen}/>
         ) }
+         {activeTab === "List" && (
+            <List id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen}/>
+        ) }
     </div>
   )
 }
