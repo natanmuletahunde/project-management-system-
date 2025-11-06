@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"; // Add this directive at the top
 
-import { useRef } from "react";
+import { useState } from "react";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
   TypedUseSelectorHook,
@@ -75,23 +75,18 @@ export type AppDispatch = AppStore["dispatch"];
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-/* PROVIDER */
-export default function StoreProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const storeRef = useRef<AppStore>();
+/* PROVIDER (FIXED) */
+export default function StoreProvider({ children }: { children: React.ReactNode }) {
+  const [store] = useState(() => {
+    const s = makeStore();
+    setupListeners(s.dispatch);
+    return s;
+  });
 
-  if (!storeRef.current) {
-    storeRef.current = makeStore();
-    setupListeners(storeRef.current.dispatch);
-  }
-
-  const persistor = persistStore(storeRef.current);
+  const [persistor] = useState(() => persistStore(store));
 
   return (
-    <Provider store={storeRef.current}>
+    <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         {children}
       </PersistGate>
