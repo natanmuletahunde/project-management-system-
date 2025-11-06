@@ -8,7 +8,7 @@ import {
   useGetTasksQuery,
 } from "@/state/api";
 import React from "react";
-import { useAppSelector } from "../redux";
+import { useAppSelector } from "./redux";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Header from "@/(components)/Header";
 import {
@@ -44,7 +44,8 @@ const HomePage = () => {
   const { data: projects, isLoading: isProjectsLoading } =
     useGetProjectsQuery();
 
-  const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const isDarkMode = useAppSelector((state: { global: { isDarkMode: any; }; }) => state.global.isDarkMode);
 
   if (tasksLoading || isProjectsLoading) return <div>Loading..</div>;
   if (tasksError || !tasks || !projects) return <div>Error fetching data</div>;
