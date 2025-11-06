@@ -8,6 +8,7 @@ async function deleteAllData(orderedFileNames: string[]) {
     const modelName = path.basename(fileName, path.extname(fileName));
     return modelName.charAt(0).toUpperCase() + modelName.slice(1);
   });
+
   for (const modelName of modelNames) {
     const model: any = prisma[modelName as keyof typeof prisma];
     try {
