@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import { getErrorMessage } from "../lib/get-error-message";
 
 const prisma = new PrismaClient();
 
@@ -31,6 +32,6 @@ export const getTeams = async (req: Request, res: Response): Promise<void> => {
   } catch (error: any) {
     res
       .status(500)
-      .json({ message: `Error retrieving teams: ${error.message}` });
+      .json({ message: `Error retrieving teams: ${getErrorMessage(error)}` });
   }
 };

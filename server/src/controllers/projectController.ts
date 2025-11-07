@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import { getErrorMessage } from "../lib/get-error-message";
 
 const prisma = new PrismaClient();
 
@@ -13,7 +14,7 @@ export const getProjects = async (
   } catch (error: any) {
     res
       .status(500)
-      .json({ message: `Error retrieving projects: ${error.message}` });
+      .json({ message: `Error retrieving projects: ${getErrorMessage(error)}` });
   }
 };
 
@@ -37,6 +38,6 @@ export const createProject = async (
     } catch (error: any) {
       res
         .status(500)
-        .json({ message: `Error creating a project: ${error.message}` });
+        .json({ message: `Error creating a project: ${getErrorMessage(error)}` });
     }
   };

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import { getErrorMessage } from "../lib/get-error-message";
 
 const prisma = new PrismaClient();
 
@@ -10,7 +11,7 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
   } catch (error: any) {
     res
       .status(500)
-      .json({ message: `Error retrieving users: ${error.message}` });
+      .json({ message: `Error retrieving users: ${getErrorMessage(error)}` });
   }
 };
 
@@ -27,7 +28,7 @@ export const getUser = async (req: Request, res: Response): Promise<void> => {
   } catch (error: any) {
     res
       .status(500)
-      .json({ message: `Error retrieving user: ${error.message}` });
+      .json({ message: `Error retrieving user: ${getErrorMessage(error)}` });
   }
 };
 
@@ -51,6 +52,6 @@ export const postUser = async (req: Request, res: Response) => {
   } catch (error: any) {
     res
       .status(500)
-      .json({ message: `Error retrieving users: ${error.message}` });
+      .json({ message: `Error retrieving users: ${getErrorMessage(error)}` });
   }
 };

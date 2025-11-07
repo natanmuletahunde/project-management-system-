@@ -1,29 +1,35 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
+import { getErrorMessage } from "../lib/get-error-message";
 
 const prisma = new PrismaClient();
 
 export const getTasks = async (req: Request, res: Response): Promise<void> => {
-  const { projectId } = req.query;
-  try {
-    const tasks = await prisma.task.findMany({
-      where: {
-        projectId: Number(projectId),
-      },
-      include: {
-        author: true,
-        assignee: true,
-        comments: true,
-        attachments: true,
-      },
-    });
-    res.json(tasks);
-  } catch (error: any) {
-    res
-      .status(500)
-      .json({ message: `Error retrieving tasks: ${error.message}` });
-  }
-};
+    const { projectId } = req.query;
+
+    const pid =
+      projectId && projectId !== "undefined" && projectId !== "null"
+        ? Number(projectId)
+        : undefined;
+
+    try {
+      const tasks = await prisma.task.findMany({
+        where: pid ? { projectId: pid } : {},  // use {} if not valid id
+        include: {
+          author: true,
+          assignee: true,
+          comments: true,
+          attachments: true,
+        },
+      });
+      res.json(tasks);
+    } catch (error: any) {
+      res
+        .status(500)
+        .json({ message: `Error retrieving tasks: ${getErrorMessage(error)}` });
+    }
+  };
+
 
 export const createTask = async (
   req: Request,
@@ -62,7 +68,7 @@ export const createTask = async (
   } catch (error: any) {
     res
       .status(500)
-      .json({ message: `Error creating a task: ${error.message}` });
+      .json({ message: `Error creating a task: ${getErrorMessage(error)}` });
   }
 };
 
@@ -83,7 +89,7 @@ export const updateTaskStatus = async (
     });
     res.json(updatedTask);
   } catch (error: any) {
-    res.status(500).json({ message: `Error updating task: ${error.message}` });
+    res.status(500).json({ message: `Error updating task: ${getErrorMessage(error)}` });
   }
 };
 
@@ -109,6 +115,6 @@ export const getUserTasks = async (
   } catch (error: any) {
     res
       .status(500)
-      .json({ message: `Error retrieving user's tasks: ${error.message}` });
+      .json({ message: `Error retrieving user's tasks: ${getErrorMessage(error)}` });
   }
 };
