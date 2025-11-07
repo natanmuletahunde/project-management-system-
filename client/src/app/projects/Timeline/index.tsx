@@ -25,8 +25,13 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
   });
 
   const ganttTasks = useMemo(() => {
-    return (
-      tasks?.map((task) => ({
+    if (!tasks) return [];
+  
+    return tasks
+      // remove bad items
+      .filter((t) => t.startDate && t.dueDate)
+      // convert
+      .map((task) => ({
         start: new Date(task.startDate as string),
         end: new Date(task.dueDate as string),
         name: task.title,
@@ -34,9 +39,9 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
         type: "task" as TaskTypeItems,
         progress: task.points ? (task.points / 10) * 100 : 0,
         isDisabled: false,
-      })) || []
-    );
+      }));
   }, [tasks]);
+  
 
   const handleViewModeChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
