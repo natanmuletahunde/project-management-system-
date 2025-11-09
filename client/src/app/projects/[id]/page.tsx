@@ -21,7 +21,7 @@ const  Project = ({params}: Props) => {
         onClose={() => setIsModalNewTaskOpen(false)}
         id={id}
       /> 
-        {}
+        <></>
          <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab}/>
         {activeTab === "Board" && (
             <Board id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen}/>
@@ -35,7 +35,6 @@ const  Project = ({params}: Props) => {
             {activeTab === "Table" && (
             <Table id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen}/>
         ) }
-        {}
     </div>
   )
 }
