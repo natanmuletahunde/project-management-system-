@@ -68,7 +68,7 @@ export const createTask = async (
   } catch (error: any) {
     res
       .status(500)
-      .json({ message: `Error creating a task: ${getErrorMessage(error)}` });
+      .json({ message: `Error creating a Task : ${getErrorMessage(error)}` });
   }
 };
 
@@ -92,7 +92,6 @@ export const updateTaskStatus = async (
     res.status(500).json({ message: `Error updating task: ${getErrorMessage(error)}` });
   }
 };
-
 export const getUserTasks = async (
   req: Request,
   res: Response

@@ -20,7 +20,8 @@ const  Project = ({params}: Props) => {
         isOpen={isModalNewTaskOpen}
         onClose={() => setIsModalNewTaskOpen(false)}
         id={id}
-      />
+      /> 
+        {}
          <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab}/>
         {activeTab === "Board" && (
             <Board id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen}/>

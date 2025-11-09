@@ -7,7 +7,8 @@ const prisma = new PrismaClient();
 export const search = async (req: Request, res: Response): Promise<void> => {
   const { query } = req.query;
   try {
-    const tasks = await prisma.task.findMany({
+    
+        const tasks = await prisma.task.findMany({
       where: {
         OR: [
           { title: { contains: query as string } },
